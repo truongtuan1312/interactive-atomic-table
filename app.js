@@ -4,11 +4,78 @@ const CATEGORY_INFO = {
   transition: { label: "Kim loại chuyển tiếp", color: "#f2d5d4" },
   post: { label: "Kim loại sau chuyển tiếp", color: "#d9e9d8" },
   metalloid: { label: "Á kim", color: "#e4dcef" },
-  nonmetal: { label: "Phi kim", color: "#f4dddd" },
+  nonmetal: { label: "Phi kim", color: "#c78282" },
   halogen: { label: "Halogen", color: "#d3e9e5" },
   noble: { label: "Khí hiếm", color: "#f0d9e4" },
-  lanthanoid: { label: "Họ Lantan", color: "#d5e9e4" },
-  actinide: { label: "Họ Actini", color: "#f3dfca" }
+  lanthanoid: { label: "Họ Lanthanum", color: "#d5e9e4" },
+  actinide: { label: "Họ Actinium", color: "#f3dfca" }
+};
+
+const GROUP_LABELS = [
+  "", "IA", "IIA", "IIIB", "IVB", "VB", "VIB", "VIIB", "VIIIB",
+  "VIIIB", "VIIIB", "IB", "IIB", "IIIA", "IVA", "VA", "VIA", "VIIA", "VIIIA"
+];
+
+const APPEARANCE_TRANSLATIONS = {
+  "colorless gas": "Khí không màu",
+  "colorless gas, exhibiting a red-orange glow when placed in a high-voltage electric field": "Khí không màu, phát sáng đỏ cam trong điện trường cao",
+  "silvery-white": "Trắng bạc",
+  "white-gray metallic": "Kim loại màu trắng xám",
+  "black-brown": "Nâu đen",
+  "colorless gas, liquid or solid": "Khí, lỏng hoặc rắn không màu",
+  "colorless gas exhibiting an orange-red glow when placed in a high voltage electric field": "Khí không màu, phát sáng đỏ cam trong điện trường cao",
+  "silvery white metallic": "Kim loại màu trắng bạc",
+  "shiny grey solid": "Chất rắn màu xám sáng bóng",
+  "silvery gray metallic": "Kim loại màu xám bạc",
+  "crystalline, reflective with bluish-tinged faces": "Dạng tinh thể phản quang, có ánh xanh lam",
+  "colourless, waxy white, yellow, scarlet, red, violet, black": "Không màu; dạng sáp có thể màu trắng, vàng, đỏ tươi, đỏ, tím hoặc đen",
+  "lemon yellow sintered microcrystals": "Vi tinh thể thiêu kết màu vàng chanh",
+  "pale yellow-green gas": "Khí màu vàng lục nhạt",
+  "colorless gas exhibiting a lilac/violet glow when placed in a high voltage electric field": "Khí không màu, phát sáng tím hoa cà trong điện trường cao",
+  "silvery gray": "Xám bạc",
+  "silvery white": "Trắng bạc",
+  "silvery grey-white metallic": "Kim loại màu trắng xám bạc",
+  "blue-silver-grey metal": "Kim loại màu xám bạc ánh xanh",
+  "silvery metallic": "Kim loại màu bạc",
+  "lustrous metallic with a grayish tinge": "Kim loại sáng bóng ánh xám",
+  "hard lustrous gray metal": "Kim loại cứng màu xám, sáng bóng",
+  "lustrous, metallic, and silver with a gold tinge": "Kim loại sáng bóng màu bạc ánh vàng",
+  "red-orange metallic luster": "Kim loại có ánh đỏ cam",
+  "silver-gray": "Xám bạc",
+  "silver-white": "Trắng bạc",
+  "grayish-white": "Trắng xám",
+  "metallic grey": "Kim loại màu xám",
+  "black, red, and gray (not pictured) allotropes": "Các dạng thù hình màu đen, đỏ và xám (không minh họa)",
+  "colorless gas, exhibiting a whitish glow in a high electric field": "Khí không màu, phát sáng trắng trong điện trường cao",
+  "grey white": "Trắng xám",
+  "gray metallic, bluish when oxidized": "Kim loại màu xám, chuyển ánh xanh khi bị oxi hóa",
+  "gray metallic": "Kim loại màu xám",
+  "shiny gray metal": "Kim loại màu xám sáng bóng",
+  "lustrous white metal": "Kim loại màu trắng sáng bóng",
+  "silvery bluish-gray metallic": "Kim loại màu xám xanh bạc",
+  "silvery lustrous gray": "Xám bạc sáng bóng",
+  "silvery-white (beta, β) or gray (alpha, α)": "Trắng bạc (dạng beta) hoặc xám (dạng alpha)",
+  "lustrous metallic gray, violet as a gas": "Kim loại màu xám sáng bóng; ở thể khí có màu tím",
+  "colorless gas, exhibiting a blue glow when placed in a high voltage electric field": "Khí không màu, phát sáng xanh lam trong điện trường cao",
+  "silvery gold": "Vàng bạc",
+  "grayish white": "Trắng xám",
+  metallic: "Ánh kim",
+  "steel gray": "Xám thép",
+  "gray blue": "Xám xanh",
+  "grayish white, lustrous": "Trắng xám, sáng bóng",
+  "silvery-grayish": "Xám bạc",
+  "silvery, blue cast": "Màu bạc ánh xanh",
+  "metallic yellow": "Kim loại màu vàng",
+  silvery: "Màu bạc",
+  "metallic gray": "Kim loại màu xám",
+  "lustrous silver": "Bạc sáng bóng",
+  "unknown, probably metallic": "Chưa rõ, có thể có ánh kim",
+  "colorless gas, occasionally glows green or red in discharge tubes": "Khí không màu, đôi khi phát sáng xanh lục hoặc đỏ trong ống phóng điện",
+  "silvery, often with black tarnish": "Màu bạc, thường xỉn đen",
+  "bright, silvery metallic luster": "Ánh kim bạc sáng",
+  "silvery white, tarnishing to dark gray in air": "Trắng bạc, xỉn thành xám đậm trong không khí",
+  "silvery metallic, glows purple in the dark": "Ánh kim bạc, phát sáng tím trong bóng tối",
+  "silver-colored": "Màu bạc"
 };
 
 const OXIDATION_STATES = {
@@ -186,6 +253,14 @@ function categoryLabel(element) {
   return CATEGORY_INFO[categoryKey(element)].label;
 }
 
+function groupLabel(group) {
+  return GROUP_LABELS[group] || String(group);
+}
+
+function appearanceLabel(appearance) {
+  return APPEARANCE_TRANSLATIONS[appearance] || appearance;
+}
+
 function formatMass(mass) {
   if (mass === null || mass === undefined || mass === "") return "—";
   const numericMass = Number(mass);
@@ -243,8 +318,9 @@ function buildTable() {
     heading.className = "group-number";
     heading.style.gridColumn = String(group + 1);
     heading.style.gridRow = "1";
-    heading.textContent = String(group);
+    heading.textContent = groupLabel(group);
     heading.setAttribute("role", "columnheader");
+    heading.setAttribute("aria-label", `Nhóm ${groupLabel(group)}`);
     table.append(heading);
   }
 
@@ -270,7 +346,7 @@ function buildTable() {
     </div>
     <div class="sample-key-copy">
       <h2>Cách đọc một ô nguyên tố</h2>
-      <p>Số trên cùng: số hiệu nguyên tử · Ký hiệu: tên viết tắt · Dòng dưới: tên nguyên tố · Cuối ô: nguyên tử khối trung bình.</p>
+      <p>Số trên cùng: số hiệu nguyên tử · Ký hiệu: tên viết tắt · Dòng dưới: tên nguyên tố · Cuối ô: nguyên tử khối trung bình (amu).</p>
     </div>
     <div class="legend" aria-label="Chú giải màu sắc"></div>`;
   table.append(key);
@@ -284,8 +360,8 @@ function buildTable() {
   });
 
   [
-    { row: 9, className: "series-label--lanthanoid", title: "Lantan", range: "57–71" },
-    { row: 10, className: "series-label--actinide", title: "Actini", range: "89–103" }
+    { row: 9, className: "series-label--lanthanoid", title: "Lanthanum", range: "57–71" },
+    { row: 10, className: "series-label--actinide", title: "Actinium", range: "89–103" }
   ].forEach((series) => {
     const label = document.createElement("div");
     label.className = `series-label ${series.className}`;
@@ -299,7 +375,7 @@ function buildTable() {
     marker.style.gridColumn = "4";
     marker.style.gridRow = String(period + 1);
     marker.textContent = "↘ Họ f";
-    marker.setAttribute("aria-label", "Họ Lantan hoặc Actini được tách xuống hàng dưới");
+    marker.setAttribute("aria-label", "Họ Lanthanum hoặc Actinium được tách xuống hàng dưới");
     table.append(marker);
   });
 
@@ -468,7 +544,7 @@ function renderDetails() {
     (category === "lanthanoid" || category === "actinide" ? "Thường gặp: +3" : "Chưa có dữ liệu thống nhất");
   const shellDistribution = Array.isArray(element.shells) ? element.shells.join(", ") : null;
   const phase = `${phaseLabel(element.phase)} (ở 20 °C)`;
-  const position = `Chu kỳ ${element.period} · Nhóm ${element.group} · Khối ${element.block || "—"}`;
+  const position = `Chu kỳ ${element.period} · Nhóm ${groupLabel(element.group)} · Khối ${element.block || "—"}`;
   const applications = applicationsFor(element)
     .map(([icon, text]) => `<div class="application-card"><span class="application-icon" aria-hidden="true">${icon}</span>${escapeHtml(text)}</div>`)
     .join("");
@@ -500,7 +576,7 @@ function renderDetails() {
       <section class="detail-section">
         <h2 class="section-heading">Thông số hóa học</h2>
         <div class="data-grid">
-          ${detailCard("Nguyên tử khối trung bình", `${formatAtomicMass(element)} u`)}
+          ${detailCard("Nguyên tử khối trung bình", `${formatAtomicMass(element)} amu`)}
          ${electronConfigurationCard("Cấu hình electron rút gọn", element.electron_configuration_semantic)}
          ${electronConfigurationCard("Cấu hình electron đầy đủ", element.electron_configuration)}
           ${detailCard("Phân bố electron theo lớp", displayValue(shellDistribution))}
@@ -521,7 +597,7 @@ function renderDetails() {
           ${detailCard("Khối lượng riêng", displayValue(element.density_g_cm3, " g/cm³"))}
           ${detailCard("Bán kính nguyên tử", displayValue(element.atomic_radius_pm, " pm"))}
           ${detailCard("Năng lượng ion hóa lần 1", displayValue(element.ionization_energy_kj_mol, " kJ/mol"))}
-          ${detailCard("Ngoại quan", displayValue(element.appearance))}
+          ${detailCard("Ngoại quan", displayValue(appearanceLabel(element.appearance)))}
         </div>
       </section>
       <section class="detail-section">

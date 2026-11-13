@@ -7,9 +7,10 @@ An interactive periodic table featuring all 118 elements, built with plain HTML,
 - Standard layout with 18 groups and 7 periods; the lanthanides and actinides are shown in separate rows.
 - Search by element name, symbol, or atomic number, and filter by chemical category.
 - Select an element to view its electron configuration, chemical and physical properties, applications, history, and safety notes.
+- Group headings use the traditional A/B notation; average atomic mass is shown in amu, and appearance descriptions are in Vietnamese.
 - Electron configurations use superscript exponents; temperatures can be switched between °C and K.
 - Includes English pronunciation, an illustrative atomic model, and a real sample photo when available.
-- Responsive layout for smaller screens.
+- Responsive layout for smaller screens, with touch-friendly horizontal scrolling for the full periodic table.
 
 ## Run locally
 

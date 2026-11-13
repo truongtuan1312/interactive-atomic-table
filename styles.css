@@ -187,6 +187,8 @@ h1 {
 .table-scroll {
   overflow-x: auto;
   padding: 3px 3px 10px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
   scrollbar-color: #bdc9c8 #f0f3f1;
   scrollbar-width: thin;
 }
@@ -295,7 +297,7 @@ h1 {
 .element--transition { --cell-bg: var(--coral-pale); --cell-accent: var(--coral); }
 .element--post { --cell-bg: var(--mint-pale); --cell-accent: var(--mint); }
 .element--metalloid { --cell-bg: var(--violet-pale); --cell-accent: var(--violet); }
-.element--nonmetal { --cell-bg: #f4dddd; --cell-accent: #cb898c; }
+.element--nonmetal { --cell-bg: #c78282; --cell-accent: #c78282; }
 .element--halogen { --cell-bg: var(--aqua-pale); --cell-accent: var(--aqua); }
 .element--noble { --cell-bg: var(--rose-pale); --cell-accent: var(--rose); }
 .element--lanthanoid { --cell-bg: #d5e9e4; --cell-accent: #65a69a; }
