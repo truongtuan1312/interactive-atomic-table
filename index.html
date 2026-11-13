@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7f5">
+    <meta name="description" content="Bảng tuần hoàn tương tác với thông tin chi tiết về 118 nguyên tố hóa học.">
+    <title>Bảng tuần hoàn nguyên tố</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="elements-data.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="page-header">
+        <div class="brand-mark" aria-hidden="true">
+          <span class="brand-nucleus"></span>
+          <span class="brand-orbit brand-orbit-one"></span>
+          <span class="brand-orbit brand-orbit-two"></span>
+        </div>
+        <div>
+          <p class="eyebrow">CẨM NANG HÓA HỌC TƯƠNG TÁC</p>
+          <h1>Bảng tuần hoàn nguyên tố</h1>
+          <p class="intro">Chạm vào một nguyên tố để khám phá câu chuyện phía sau ký hiệu.</p>
+        </div>
+      </header>
+
+      <section class="toolbar" aria-label="Tìm và lọc nguyên tố">
+        <label class="search-wrap">
+          <span class="sr-only">Tìm nguyên tố</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="10.8" cy="10.8" r="6.8"></circle>
+            <path d="m16 16 4.5 4.5"></path>
+          </svg>
+          <input id="search" type="search" placeholder="Tìm theo tên, ký hiệu hoặc số hiệu..." autocomplete="off">
+        </label>
+        <label class="filter-wrap">
+          <span class="sr-only">Lọc theo nhóm</span>
+          <select id="category-filter">
+            <option value="all">Tất cả nhóm nguyên tố</option>
+          </select>
+        </label>
+        <p id="result-count" class="result-count" aria-live="polite">Đang tải dữ liệu...</p>
+      </section>
+
+      <section class="table-section" aria-label="Bảng tuần hoàn 118 nguyên tố">
+        <div class="table-scroll">
+          <div id="periodic-table" class="periodic-grid" role="grid" aria-label="Bảng tuần hoàn">
+            <p class="loading-message">Đang tải bảng tuần hoàn...</p>
+          </div>
+        </div>
+        <p class="scroll-hint">Trên màn hình nhỏ, vuốt ngang để xem đủ các nhóm.</p>
+      </section>
+
+      <footer class="page-footer">
+        <p>Chọn một ô để xem thông tin. Màu sắc biểu thị nhóm tính chất hóa học.</p>
+        <p class="data-credit">Dữ liệu nguyên tố: <a href="https://github.com/Bowserinator/Periodic-Table-JSON" target="_blank" rel="noreferrer">Periodic-Table-JSON</a>, theo giấy phép CC BY-SA 3.0.</p>
+      </footer>
+    </main>
+
+    <dialog id="detail-dialog" aria-labelledby="detail-title">
+      <button id="close-dialog" class="close-button" type="button" aria-label="Đóng thông tin">×</button>
+      <div id="detail-content"></div>
+    </dialog>
+  </body>
+</html>
