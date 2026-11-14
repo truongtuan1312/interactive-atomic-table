@@ -1,14 +1,15 @@
 const CATEGORY_INFO = {
-  alkali: { label: "Kim loại kiềm", color: "#dce9f3" },
-  alkaline: { label: "Kim loại kiềm thổ", color: "#f5e5c4" },
-  transition: { label: "Kim loại chuyển tiếp", color: "#f2d5d4" },
-  post: { label: "Kim loại sau chuyển tiếp", color: "#d9e9d8" },
-  metalloid: { label: "Á kim", color: "#e4dcef" },
-  nonmetal: { label: "Phi kim", color: "#c78282" },
-  halogen: { label: "Halogen", color: "#d3e9e5" },
-  noble: { label: "Khí hiếm", color: "#f0d9e4" },
-  lanthanoid: { label: "Họ Lanthanum", color: "#d5e9e4" },
-  actinide: { label: "Họ Actinium", color: "#f3dfca" }
+  "main-metal": { label: "Kim loại nhóm A", color: "var(--blue-pale)" },
+  "transition-metal": { label: "Kim loại chuyển tiếp - Nhóm B", color: "var(--gold-pale)" },
+  nonmetal: { label: "Phi kim", color: "var(--coral-pale)" },
+  "noble-gas": { label: "Khí hiếm - Nhóm VIIIA", color: "var(--mint-pale)" }
+};
+
+const CATEGORY_SYMBOLS = {
+  "main-metal": new Set("Li Na K Rb Cs Fr Be Mg Ca Sr Ba Ra Al Ga In Tl Nh Ge Sn Pb Fl Sb Bi Mc Po Lv".split(" ")),
+  "transition-metal": new Set("Sc Ti V Cr Mn Fe Co Ni Cu Zn Y Zr Nb Mo Tc Ru Rh Pd Ag Cd Hf Ta W Re Os Ir Pt Au Hg Rf Db Sg Bh Hs Mt Ds Rg Cn La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Ac Th Pa U Np Pu Am Cm Bk Cf Es Fm Md No Lr".split(" ")),
+  nonmetal: new Set("B C Si N P As O S Se Te F Cl Br I At Ts".split(" ")),
+  "noble-gas": new Set("He Ne Ar Kr Xe Rn Og".split(" "))
 };
 
 const GROUP_LABELS = [
@@ -229,24 +230,11 @@ let currentElement = null;
 let temperatureUnit = "C";
 
 function categoryKey(element) {
-  const category = (element.category || "").toLowerCase();
-  if (category.includes("lanthanide")) return "lanthanoid";
-  if (category.includes("actinide")) return "actinide";
-  if (category.includes("alkali metal")) return "alkali";
-  if (category.includes("alkaline earth")) return "alkaline";
-  if (category.includes("transition metal")) return "transition";
-  if (category.includes("post-transition")) return "post";
-  if (category.includes("metalloid")) return "metalloid";
-  if (category.includes("halogen")) return "halogen";
-  if (category.includes("noble gas")) return "noble";
-  if (category.includes("nonmetal")) return "nonmetal";
-  if (element.number === 1) return "nonmetal";
-  if (element.group === 1) return "alkali";
-  if (element.group === 2) return "alkaline";
-  if (element.group >= 3 && element.group <= 12) return "transition";
-  if (element.group === 17) return "halogen";
-  if (element.group === 18) return "noble";
-  return "post";
+  if (element.symbol === "H") return "nonmetal";
+  for (const [key, symbols] of Object.entries(CATEGORY_SYMBOLS)) {
+    if (symbols.has(element.symbol)) return key;
+  }
+  throw new Error(`Chưa có phân loại màu cho nguyên tố ${element.symbol}`);
 }
 
 function categoryLabel(element) {
@@ -340,7 +328,7 @@ function buildTable() {
   key.style.gridRow = "3 / span 2";
   key.setAttribute("aria-label", "Chú giải cách đọc và màu sắc");
   key.innerHTML = `
-    <div class="element sample-cell element--alkali" aria-hidden="true">
+    <div class="element sample-cell element--main-metal" aria-hidden="true">
       <span class="atomic-number">3</span><span class="element-symbol">Li</span>
       <span class="element-name">Lithium</span><span class="atomic-mass">6.94</span>
     </div>
@@ -383,7 +371,7 @@ function buildTable() {
     const position = elementPosition(element);
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `element element--${categoryKey(element)}`;
+    button.className = `element element--${categoryKey(element)}${element.symbol === "H" ? " element--hydrogen" : ""}`;
     button.dataset.number = String(element.number);
     button.dataset.name = element.name.toLowerCase();
     button.dataset.symbol = element.symbol.toLowerCase();
@@ -540,18 +528,19 @@ function renderDetails() {
   if (!element) return;
 
   const category = categoryKey(element);
+  const isLanthanideOrActinide = /lanthanide|actinide/i.test(element.category || "");
   const oxidation = OXIDATION_STATES[element.symbol] ||
-    (category === "lanthanoid" || category === "actinide" ? "Thường gặp: +3" : "Chưa có dữ liệu thống nhất");
+    (isLanthanideOrActinide ? "Thường gặp: +3" : "Chưa có dữ liệu thống nhất");
   const shellDistribution = Array.isArray(element.shells) ? element.shells.join(", ") : null;
   const phase = `${phaseLabel(element.phase)} (ở 20 °C)`;
-  const position = `Chu kỳ ${element.period} · Nhóm ${groupLabel(element.group)} · Khối ${element.block || "—"}`;
+  const position = `Chu kỳ ${element.period} · Nhóm ${groupLabel(element.group)} · Nguyên tố ${element.block || "—"}`;
   const applications = applicationsFor(element)
     .map(([icon, text]) => `<div class="application-card"><span class="application-icon" aria-hidden="true">${icon}</span>${escapeHtml(text)}</div>`)
     .join("");
   const photo = elementPhotoMarkup(element);
 
   detailContent.innerHTML = `
-    <section class="detail-hero element--${category}" style="--cell-accent: var(--${category === "alkali" ? "blue" : category === "alkaline" ? "gold" : category === "transition" ? "coral" : category === "post" ? "mint" : category === "metalloid" ? "violet" : category === "halogen" ? "aqua" : category === "noble" ? "rose" : category === "lanthanoid" ? "mint" : category === "actinide" ? "gold" : "coral"})">
+    <section class="detail-hero element--${category}${element.symbol === "H" ? " element--hydrogen" : ""}">
       <div class="atom-art" aria-label="Minh họa mô hình nguyên tử">
         <span class="atom-orbit atom-orbit--one"></span><span class="atom-orbit atom-orbit--two"></span>
         <span class="atom-orbit atom-orbit--three"></span><span class="atom-core">${escapeHtml(element.symbol)}</span>

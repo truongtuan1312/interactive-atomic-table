@@ -20,16 +20,12 @@ Một ô nguyên tố chuẩn cần có thứ tự ưu tiên thông tin rõ ràn
 
 3. Quy tắc về Phân nhóm & Màu sắc (Giúp bảng trực quan)
 
-Khi phối màu cho bản custom, bạn không nên tô màu ngẫu nhiên mà hãy dùng màu sắc để phân loại tính chất hóa học. Một bộ màu chuẩn thường chia làm 9–10 nhóm:
-• Kim loại kiềm (Nhóm 1, trừ Hydro)
-• Kim loại kiềm thổ (Nhóm 2)
-• Kim loại chuyển tiếp (Nhóm 3 đến 12)
-• Kim loại sau chuyển tiếp (Al, Ga, In, Sn, Tl, Pb, Bi...)
-• Á kim (B, Si, Ge, As, Sb, Te, Po) – Nên tạo một đường bậc thang ranh giới rõ ràng giữa kim loại và phi kim tại khu vực này.
-• Phi kim hoạt động (H, C, N, O, P, S, Se)
-• Halogen (Nhóm 17: F, Cl, Br, I, At, Ts) – Có thể gộp chung vào nhóm phi kim nếu muốn tối giản bảng màu.
-• Khí hiếm (Nhóm 18)
-• Họ Lantan và Họ Actini
+Chỉ dùng 4 màu pastel để phân loại theo các danh sách sau:
+• Xanh dương – Kim loại nhóm A: Li, Na, K, Rb, Cs, Fr, Be, Mg, Ca, Sr, Ba, Ra, Al, Ga, In, Tl, Nh, Ge, Sn, Pb, Fl, Sb, Bi, Mc, Po, Lv.
+• Vàng nhạt – Kim loại chuyển tiếp nhóm B: Sc, Ti, V, Cr, Mn, Fe, Co, Ni, Cu, Zn, Y, Zr, Nb, Mo, Tc, Ru, Rh, Pd, Ag, Cd, Hf, Ta, W, Re, Os, Ir, Pt, Au, Hg, Rf, Db, Sg, Bh, Hs, Mt, Ds, Rg, Cn, La, Ce, Pr, Nd, Pm, Sm, Eu, Gd, Tb, Dy, Ho, Er, Tm, Yb, Lu, Ac, Th, Pa, U, Np, Pu, Am, Cm, Bk, Cf, Es, Fm, Md, No, Lr.
+• Hồng/cam đỏ – Phi kim: B, C, Si, N, P, As, O, S, Se, Te, F, Cl, Br, I, At, Ts.
+• Xanh lá nhạt – Khí hiếm: He, Ne, Ar, Kr, Xe, Rn, Og.
+Hydro (H) thuộc phi kim nhưng để nền trắng/xám nhạt riêng.
 
 4. Quy tắc về Chú thích (Legend / Key)
 
