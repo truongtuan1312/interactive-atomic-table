@@ -149,6 +149,7 @@ h1 {
   border-radius: 11px;
   background: rgba(255, 255, 255, .9);
   box-shadow: 0 3px 12px rgba(42, 63, 76, .035);
+  transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
 }
 
 .search-wrap {
@@ -188,6 +189,7 @@ h1 {
 .filter-wrap select {
   height: 44px;
   cursor: pointer;
+  transition: color var(--transition-speed) ease;
 }
 
 .result-count {
@@ -250,7 +252,7 @@ h1 {
   background: var(--cell-bg);
   text-align: left;
   cursor: pointer;
-  transition: box-shadow 160ms ease, filter 160ms ease;
+  transition: box-shadow 160ms ease, filter 300ms ease, opacity 300ms ease, transform 200ms ease;
 }
 
 .element:hover,
@@ -990,11 +992,11 @@ dialog::backdrop {
 }
 
 :root[data-theme="dark"] .page-footer {
-  color: #6e8390;
+  color: #506878;
 }
 
 :root[data-theme="dark"] .page-footer a {
-  color: #6ea0c0;
+  color: #4a7a98;
 }
 
 :root[data-theme="dark"] dialog {
@@ -1069,7 +1071,7 @@ dialog::backdrop {
 :root[data-theme="dark"] .pronounce-button {
   background: #1e2a35;
   border-color: #304050;
-  color: #8fa3b0;
+  color: #5e7280;
 }
 
 /* ── Print layout: QR code placeholder + sample element ── */
