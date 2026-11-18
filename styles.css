@@ -15,6 +15,26 @@
   --mint-pale: #e1efdc;
   --shadow: 0 18px 55px rgba(37, 58, 76, .12);
   font-family: Inter, "Segoe UI", Arial, sans-serif;
+  --transition-speed: 0.35s;
+}
+
+/* ── Dark mode theme ── */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: #d8e2ea;
+  --muted: #8fa3b0;
+  --line: #2e3d4a;
+  --paper: #131b23;
+  --white: #1a2530;
+  --blue: #6e94c0;
+  --blue-pale: #1e2e42;
+  --gold: #c5a14a;
+  --gold-pale: #2e2816;
+  --coral: #d88480;
+  --coral-pale: #3a2120;
+  --mint: #7fae83;
+  --mint-pale: #1a2e1c;
+  --shadow: 0 18px 55px rgba(0, 0, 0, .4);
 }
 
 * {
@@ -28,6 +48,13 @@ body {
     radial-gradient(ellipse at 82% 0, rgba(213, 230, 219, .45), transparent 34rem),
     var(--paper);
   color: var(--ink);
+  transition: background var(--transition-speed) ease, color var(--transition-speed) ease;
+}
+
+:root[data-theme="dark"] body {
+  background:
+    radial-gradient(ellipse at 82% 0, rgba(30, 60, 50, .3), transparent 34rem),
+    var(--paper);
 }
 
 button,
@@ -497,6 +524,43 @@ dialog::backdrop {
   cursor: pointer;
 }
 
+.print-detail-btn {
+  position: sticky;
+  z-index: 3;
+  top: 13px;
+  float: right;
+  width: 38px;
+  height: 38px;
+  margin: 13px 56px -51px 0;
+  border: 1px solid rgba(47, 67, 78, .12);
+  border-radius: 50%;
+  color: #526977;
+  background: rgba(255, 255, 255, .88);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.print-detail-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.print-detail-btn:hover {
+  background: rgba(240, 240, 240, .95);
+}
+
+:root[data-theme="dark"] .print-detail-btn {
+  border-color: rgba(255, 255, 255, .15);
+  color: #c0cdd5;
+  background: rgba(30, 40, 50, .85);
+}
+
 .detail-hero {
   display: grid;
   grid-template-columns: 180px minmax(0, 1fr);
@@ -773,6 +837,378 @@ dialog::backdrop {
   background: #fff8ed;
   font-size: .82rem;
   line-height: 1.55;
+}
+
+/* ── Theme toggle button (sun/moon) ── */
+.theme-toggle {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .9);
+  cursor: pointer;
+  transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+:root[data-theme="dark"] .theme-toggle {
+  background: rgba(30, 40, 52, .9);
+}
+
+.theme-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.5s cubic-bezier(.4, 0, .2, 1), opacity 0.3s ease;
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  position: absolute;
+}
+
+.theme-toggle .icon-moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+/* ── Print button in toolbar ── */
+.print-button {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: rgba(255, 255, 255, .9);
+  color: var(--ink);
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-speed) ease, border-color var(--transition-speed) ease;
+  flex-shrink: 0;
+}
+
+:root[data-theme="dark"] .print-button {
+  background: rgba(30, 40, 52, .9);
+}
+
+.print-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Dark mode overrides for existing UI components ── */
+:root[data-theme="dark"] .search-wrap,
+:root[data-theme="dark"] .filter-wrap {
+  background: rgba(30, 40, 52, .9);
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .search-wrap svg {
+  stroke: #8fa3b0;
+}
+
+:root[data-theme="dark"] .search-wrap input::placeholder {
+  color: #6a7d8a;
+}
+
+:root[data-theme="dark"] .table-section {
+  border-color: #253040;
+  background: rgba(22, 30, 40, .74);
+}
+
+:root[data-theme="dark"] .element {
+  border-color: rgba(200, 220, 240, .08);
+}
+
+:root[data-theme="dark"] .element-name {
+  color: rgba(100, 130, 155, .85);
+}
+
+:root[data-theme="dark"] .atomic-mass {
+  color: rgba(100, 130, 155, .82);
+}
+
+:root[data-theme="dark"] .group-number,
+:root[data-theme="dark"] .period-number {
+  color: #5a6e7a;
+}
+
+:root[data-theme="dark"] .sample-key {
+  border-color: #253040;
+  background: rgba(22, 30, 40, .87);
+}
+
+:root[data-theme="dark"] .sample-key h2 {
+  color: #b0c4d4;
+}
+
+:root[data-theme="dark"] .sample-key p {
+  color: var(--muted);
+}
+
+:root[data-theme="dark"] .series-label {
+  color: #6e8390;
+}
+
+:root[data-theme="dark"] .series-marker {
+  border-color: rgba(102, 125, 133, .25);
+  color: #6e8390;
+}
+
+:root[data-theme="dark"] h1 {
+  color: #c8dae8;
+}
+
+:root[data-theme="dark"] .eyebrow {
+  color: #5a8caa;
+}
+
+:root[data-theme="dark"] .page-footer {
+  color: #6e8390;
+}
+
+:root[data-theme="dark"] .page-footer a {
+  color: #6ea0c0;
+}
+
+:root[data-theme="dark"] dialog {
+  background: #1a2530;
+  border-color: rgba(100, 140, 180, .15);
+}
+
+:root[data-theme="dark"] dialog::backdrop {
+  background: rgba(0, 0, 0, .65);
+}
+
+:root[data-theme="dark"] .close-button {
+  background: rgba(30, 40, 52, .88);
+  border-color: rgba(100, 140, 180, .15);
+  color: #8fa3b0;
+}
+
+:root[data-theme="dark"] .detail-hero {
+  background: linear-gradient(120deg, #1a2530, #1e2a35);
+}
+
+:root[data-theme="dark"] .detail-kicker { color: #6e8390; }
+:root[data-theme="dark"] .detail-name { color: #b0c8d8; }
+:root[data-theme="dark"] .meta-chip {
+  background: rgba(100, 140, 180, .1);
+  border-color: rgba(100, 140, 180, .15);
+  color: #8fa3b0;
+}
+
+:root[data-theme="dark"] .section-heading {
+  color: #b0c8d8;
+  border-bottom-color: #253040;
+}
+
+:root[data-theme="dark"] .data-card {
+  background: #1e2a35;
+  border-color: #253040;
+}
+
+:root[data-theme="dark"] .data-label { color: #6e8390; }
+:root[data-theme="dark"] .data-value { color: #b0c8d8; }
+
+:root[data-theme="dark"] .temperature-toggle {
+  background: #1e2a35;
+  border-color: #304050;
+  color: #8fa3b0;
+}
+
+:root[data-theme="dark"] .application-card {
+  background: #1e2a35;
+  border-color: #253040;
+  color: #8fa3b0;
+}
+
+:root[data-theme="dark"] .detail-copy { color: #8fa3b0; }
+
+:root[data-theme="dark"] .safety-note {
+  background: #2a2218;
+  border-color: #3d3220;
+  color: #c5a870;
+}
+
+:root[data-theme="dark"] .element-photo {
+  background: #1e2a35;
+  border-color: #253040;
+}
+
+:root[data-theme="dark"] .element-photo-frame {
+  background: #131b23;
+}
+
+:root[data-theme="dark"] .pronounce-button {
+  background: #1e2a35;
+  border-color: #304050;
+  color: #8fa3b0;
+}
+
+/* ── Print layout: QR code placeholder + sample element ── */
+.print-header {
+  display: none;
+}
+
+.print-sample-element {
+  display: none;
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: #263a4d !important;
+  }
+
+  .page-header,
+  .toolbar,
+  .page-footer,
+  .scroll-hint,
+  .theme-toggle,
+  .print-button,
+  .result-count {
+    display: none !important;
+  }
+
+  .page-shell {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .print-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .print-header h2 {
+    font-size: 1rem !important;
+    margin: 0 !important;
+  }
+
+  .print-header p {
+    font-size: .65rem !important;
+    margin: 2px 0 0 !important;
+  }
+
+  .print-qr-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .print-qr-code {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+    font-size: .5rem;
+    color: #888;
+    text-align: center;
+    padding: 2px;
+  }
+
+  .print-qr-label {
+    font-size: .55rem;
+    color: #888;
+  }
+
+  .print-sample-element {
+    display: none !important;
+  }
+
+  dialog {
+    display: none !important;
+  }
+
+  .table-section {
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .table-scroll {
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  .periodic-grid {
+    transform: scale(var(--print-scale, 1));
+    transform-origin: top left;
+  }
+
+  .element:hover,
+  .element:focus-visible {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* When printing with detail dialog open: show detail, hide table */
+@media print {
+  body.print-detail .page-shell {
+    display: none !important;
+  }
+  body.print-detail .print-header {
+    display: none !important;
+  }
+  body.print-detail .print-sample-element {
+    display: none !important;
+  }
+  body.print-detail #detail-dialog {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+    overflow: visible !important;
+  }
+  body.print-detail #detail-dialog::backdrop {
+    display: none !important;
+  }
+  body.print-detail .close-button,
+  body.print-detail .print-detail-btn {
+    display: none !important;
+  }
 }
 
 @media (max-width: 700px) {

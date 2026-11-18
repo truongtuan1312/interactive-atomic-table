@@ -649,3 +649,19 @@ if (Array.isArray(window.PERIODIC_ELEMENTS) && window.PERIODIC_ELEMENTS.length =
   table.innerHTML = '<p class="load-error">Không tải được dữ liệu 118 nguyên tố. Hãy kiểm tra tệp elements-data.js.</p>';
   resultCount.textContent = "Không tải được dữ liệu";
 }
+
+/* ── Dark / Light mode toggle with localStorage persistence ── */
+(function initThemeToggle() {
+  const toggle = document.querySelector("#theme-toggle");
+  const stored = localStorage.getItem("theme");
+  if (stored === "dark" || (!stored && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+    document.documentElement.setAttribute("data-theme", "dark");
+  }
+  toggle.addEventListener("click", () => {
+    const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+    const next = isDark ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  });
+})();
+
